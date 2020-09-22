@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT - Smart Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" style="font-weight: bold;" href="/">Parâmetros gerais</a>
+            <a class="btn btn-primary" style="font-weight: bold;" href="/parametros" role="button">Alterar</a>
+        </nav>
+    </header>
+    <main>
+		<section>
+			<div class="container" style="width: 60%; padding-bottom: 30px;">
+				<div>
+					<span>Umidade atual: <span th:text="${parametros.umidadeAtual}"></span></span>
+					<span>Temperatura Atual: <span th:text="${parametros.temperaturaAtual}"></span></span>
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">Aparelho</th>
+								<th scope="col">Estado</th>
+								<th scope="col">Valor mínimo</th>
+								<th scope="col">Valor máximo</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th scope="row">Umidificador</th>
+								<td th:switch="${parametros.estadoUmidificador}">
+									<span th:case="${T(com.iot.umidade.model.EstadoAparelho).AUTO}">Automático</span>
+									<span th:case="${T(com.iot.umidade.model.EstadoAparelho).ON}">Ligado</span>
+									<span th:case="${T(com.iot.umidade.model.EstadoAparelho).OFF}">Desligado</span>
+									<span th:case="*" th:text="${parametros.estadoUmidificador}"></span>
+								</td>
+								<td><span th:text="${parametros.umidadeMinima}"></span></td>
+								<td><span th:text="${parametros.umidadeMaxima}"></span></td>
+							</tr>
+							<tr>
+								<th scope="row">Ar condicionado</th>
+								<td th:switch="${parametros.estadoArCondicionado}">
+									<span th:case="${T(com.iot.umidade.model.EstadoAparelho).AUTO}">Automático</span>
+									<span th:case="${T(com.iot.umidade.model.EstadoAparelho).ON}">Ligado</span>
+									<span th:case="${T(com.iot.umidade.model.EstadoAparelho).OFF}">Desligado</span>
+									<span th:case="*" th:text="${parametros.estadoUmidificador}"></span>
+								</td>
+								<td><span th:text="${parametros.temperaturaMinima}"></span></td>
+								<td><span th:text="${parametros.temperaturaMaxima}"></span></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</section>
+	</main>
+</body>
+</html>

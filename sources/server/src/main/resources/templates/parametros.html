@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parâmetros</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+	crossorigin="anonymous">
+</head>
+<body>
+	<header>
+		<nav class="navbar navbar-light bg-light">
+			<a class="navbar-brand" style="font-weight: bold;" href="/parametros">Alterar parâmetros gerais</a>
+		</nav>
+	</header>
+	<main>
+		<section>
+			<div class="container" style="width: 60%; padding-bottom: 30px;">
+				<div>
+					<form action="#" method="post" th:action="@{/parametros}"
+						th:object="${parametros}">
+						<fieldset class="form-group">
+							<div class="row">
+								<legend class="col-form-label col-sm-3 pt-0">Umidificador:</legend>
+								<div class="col-sm-9">
+									<div class="form-check form-check-inline">
+									  <input class="form-check-input" type="radio" th:field="*{estadoUmidificador}" id="umidificadorAuto" value="AUTO">
+									  <label class="form-check-label" for="umidificadorAuto">Automático</label>
+									</div>
+									<div class="form-check form-check-inline">
+									  <input class="form-check-input" type="radio" th:field="*{estadoUmidificador}" id="umidificadorOn" value="ON">
+									  <label class="form-check-label" for="umidificadorOn">Ligado</label>
+									</div>
+									<div class="form-check form-check-inline">
+									  <input class="form-check-input" type="radio" th:field="*{estadoUmidificador}" id="umimdificadorOff" value="OFF">
+									  <label class="form-check-label" for="umimdificadorOff">Desligado</label>
+									</div> 
+									<small id="estadoUmidificadorHelp" class="form-text text-muted">AUTO: o umidificador é ligado/desligado automaticamente de acordo com a umidade relativa do ar.</small>
+									<div class="alert alert-danger alert-dismissible" role="alert" th:if="${#fields.hasErrors('estadoUmidificador')}" th:errors="*{estadoUmidificador}"></div>
+								</div>
+							</div>
+						</fieldset>
+						<div class="form-group row">
+							<label for="umidadeMinima" class="col-sm-3 col-form-label">*Umidade mínima:</label>
+							<div class="col-sm-9">
+								<input type="number" min="30" max="80" step=".01" class="form-control" name="umidadeMinima" placeholder="Umidade mínima" th:field="*{umidadeMinima}">
+								<small id="umidadeMinimaHelp" class="form-text text-muted">o umidificador é ligado se a umidade relativa do ar estiver abaixo deste valor.</small>
+								<div class="alert alert-danger alert-dismissible" role="alert" th:if="${#fields.hasErrors('umidadeMinima')}" th:errors="*{umidadeMinima}"></div>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="umidadeMaxima" class="col-sm-3 col-form-label">*Umidade máxima:</label>
+							<div class="col-sm-9">
+								<input type="number" min="30" max="80" step=".01" class="form-control" name="umidadeMaxima" placeholder="Umidade máxima" th:field="*{umidadeMaxima}">
+								<small id="umidadeMaximaHelp" class="form-text text-muted">o umidificador é desligado se a umidade relativa do ar estiver acima deste valor.</small>
+								<div class="alert alert-danger alert-dismissible" role="alert" th:if="${#fields.hasErrors('umidadeMaxima')}" th:errors="*{umidadeMaxima}"></div>
+							</div>
+						</div>
+						<fieldset class="form-group">
+							<div class="row">
+								<legend class="col-form-label col-sm-3 pt-0">Ar condicionado:</legend>
+								<div class="col-sm-9"> 
+									<div class="form-check form-check-inline">
+									  <input class="form-check-input" type="radio" th:field="*{estadoArCondicionado}" id="arCondicionadoAuto" value="AUTO">
+									  <label class="form-check-label" for="arCondicionadoAuto">Automático</label>
+									</div>
+									<div class="form-check form-check-inline">
+									  <input class="form-check-input" type="radio" th:field="*{estadoArCondicionado}" id="arCondicionadoOn" value="ON">
+									  <label class="form-check-label" for="arCondicionadoOn">Ligado</label>
+									</div>
+									<div class="form-check form-check-inline">
+									  <input class="form-check-input" type="radio" th:field="*{estadoArCondicionado}" id="arCondicionadoOff" value="OFF">
+									  <label class="form-check-label" for="arCondicionadoOff">Desligado</label>
+									</div>
+									<small id="estadoArCondicionadolHelp" class="form-text text-muted">Automático: o ar condicionado é ligado/desligado automaticamente de acordo com os valores de temperatura.</small>
+									<div class="alert alert-danger alert-dismissible" role="alert" th:if="${#fields.hasErrors('estadoArCondicionado')}" th:errors="*{estadoArCondicionado}"></div>
+								</div>
+							</div>
+						</fieldset>
+						<div class="form-group row">
+							<label for="temperaturaMinima" class="col-sm-3 col-form-label">*Temperatura mínima:</label>
+							<div class="col-sm-9">
+								<input type="number" min="16" max="40" step=".01" class="form-control" name="temperaturaMinima" placeholder="Temperatura mínima" th:field="*{temperaturaMinima}">
+								<small id="temperaturaMinimaHelp" class="form-text text-muted">o ar condicionado é desligado se a temperatura estiver abaixo deste valor.</small>
+								<div class="alert alert-danger alert-dismissible" role="alert" th:if="${#fields.hasErrors('temperaturaMinima')}" th:errors="*{temperaturaMinima}"></div>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="temperaturaMaxima" class="col-sm-3 col-form-label">*Temperatura máxima:</label>
+							<div class="col-sm-9">
+								<input type="number" min="16" max="40" step=".01" class="form-control" name="temperaturaMaxima" placeholder="Temperatura máxima" th:field="*{temperaturaMaxima}">
+								<small id="temperaturaMaximaHelp" class="form-text text-muted">o ar condicionado é ligado se a temperatura estiver acima deste valor.</small>
+								<div class="alert alert-danger alert-dismissible" role="alert" th:if="${#fields.hasErrors('temperaturaMaxima')}" th:errors="*{temperaturaMaxima}"></div>
+							</div>
+						</div>
+						<small class="form-text text-muted">(*) Campos
+							obrigatórios</small>
+
+						<button type="submit" class="btn btn-primary"
+							style="margin-top: 10px;">Salvar</button>
+						<a href="/" class="btn btn-light" role="button"
+							style="margin-top: 10px;">Cancelar</a>
+					</form>
+				</div>
+			</div>
+		</section>
+	</main>
+</body>
+</html>
