@@ -9,7 +9,7 @@
  **************************************************************/
 
 #include <ArduinoJson.h>
-#include <SPI.h>
+//#include <SPI.h>
 #include <ESP8266WiFi.h>
 #include <SimpleTimer.h>
 #include <DHT.h>
